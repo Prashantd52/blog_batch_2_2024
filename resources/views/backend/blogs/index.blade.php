@@ -37,7 +37,7 @@ Blog List
                     <div class="card-body card-dashboard dataTables_wrapper dt-bootstrap">
                         
                         <div class="table-responsive">
-                            <table class="table table-striped table-bordered " id="category-data">
+                            <table class="table table-striped table-bordered " id="blog-data">
                                 <thead>
                                     <tr>
                                         <th>Title</th>
@@ -46,6 +46,7 @@ Blog List
                                         <th>Content</th>
                                         <th>Tags</th>
                                         <th>Author</th>
+                                        <th>action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -67,29 +68,28 @@ Blog List
 
 <script>
     $(document).ready(function() {
-        // $('#category-data').DataTable({
-        //    "bProcessing": true,
-        //     "serverSide": true,
-        //     "scrollY": true,
-        //     "scrollX": true,
-        //     "pageLength":10,
-        //     "lengthMenu": [10,50,100,1000],
-        //     dom: 'Bfrtip',
-        //     buttons: [
-        //         'csv', 'excel', 'pdf', 'print','pageLength'
-        //     ],
-        //     "ajax":{
-        //         type: "post",  // type of method  ,GET/POST/DELETE
-        //         url :"{{Route('categories.get_data')}}", // json datasource
-        //         data:{
-        //             _token: "{{csrf_token()}}",
-        //         },
-        //         error: function(data){
-        //             $("#addOnList").css("display","none");
-        //             alert(data.responseText);
-        //         }
-        //     }
-        // });
+        $('#blog-data').DataTable({
+           "bProcessing": true,
+            "serverSide": true,
+            "scrollY": true,
+            "scrollX": true,
+            "pageLength":10,
+            "lengthMenu": [10,50,100,1000],
+            dom: 'Bfrtip',
+            buttons: [
+                'csv', 'excel', 'pdf', 'print','pageLength'
+            ],
+            "ajax":{
+                type: "get",  // type of method  ,GET/POST/DELETE
+                url :"{{Route('blogs.list')}}", // json datasource
+                data:{
+                },
+                error: function(data){
+                    $("#blog-data").css("display","none");
+                    alert(data.responseText);
+                }
+            }
+        });
     });
 </script>
 @endsection

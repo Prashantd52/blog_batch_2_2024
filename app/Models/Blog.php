@@ -13,8 +13,13 @@ class Blog extends Model
 
     protected $table = "blogs";
 
-    public function tags()
+    public function tags()      //many to many relationship
     {
         return $this->belongsToMany(Tag::class);
+    }
+
+    public function category()  //one to many  inverse relationship
+    {
+        return $this->belongsTo(Category::class, 'category_id', 'id');
     }
 }

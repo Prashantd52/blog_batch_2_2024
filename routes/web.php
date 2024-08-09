@@ -35,4 +35,5 @@ Route::prefix('blog')->name('blogs.')->group(function () {
     Route::get('/index', [BlogController::class, 'index'])->name('list');
     Route::get('/create', [BlogController::class, 'create'])->name('create');
     Route::post('/store', [BlogController::class, 'store'])->name('store');
+    Route::get('/edit/{id}', [BlogController::class, 'edit'])->name('edit');
 });
