@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title')</title>
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> -->
+    <title>{{$title??''}}</title>
 
     <link rel="apple-touch-icon" href="{{asset('app-assets/images/ico/apple-icon-120.png')}}">
     <link rel="shortcut icon" type="image/x-icon" href="{{asset('app-assets/images/ico/favicon.ico')}}">
@@ -33,50 +32,11 @@
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/style.css')}}">
     <!-- END: Custom CSS-->
-     
-    @yield('page-css')
 </head>
-<body class="vertical-layout vertical-menu-modern vertical-collapsed-menu 2-columns   menu-collapsed fixed-navbar" data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
-    @auth
-        @include('backend.layouts.header')
-        @include('backend.layouts.sidebar')
+<body>
 
-        <div class="app-content content">
-            <div class="content-overlay"></div>
-            <div class="content-wrapper">
-                <div class="content-header row">
-                    @include('backend.layouts.breadcum')
-                </div>
-                <div class="content-body">
-                    @if(session()->has('success'))
-                        <div class="alert alert-success">
-                            {{ session()->get('success') }}
-                        </div>
-                    @elseif(session()->has('error'))
-                        <div class="alert alert-danger">
-                            {{ session()->get('error') }}
-                        </div>
-                    @endif
-                    
-                    @yield('content')
-        
-                </div>
-            </div>
-        </div>
+    {!! $content !!}
 
-        <div class="sidenav-overlay"></div>
-        <div class="drag-target"></div>
-
-        <!-- BEGIN: Footer-->
-        <footer class="footer footer-static footer-light navbar-border navbar-shadow">
-            <p class="clearfix blue-grey lighten-2 text-sm-center mb-0 px-2"><span class="float-md-left d-block d-md-inline-block">Copyright &copy; 2024 <a class="text-bold-800 grey darken-2" href="https://1.envato.market/modern_admin" target="_blank">ISPL</a></span><span class="float-md-right d-none d-lg-block">Hand-crafted & Made with<i class="ft-heart pink"></i><span id="scroll-top"></span></span></p>
-        </footer>
-        <!-- END: Footer-->
-    @else
-        @yield('content')
-    @endauth
-    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script> -->
-    <!-- BEGIN: Vendor JS-->
     <script src="{{asset('app-assets/vendors/js/vendors.min.js')}}"></script>
     <!-- BEGIN Vendor JS-->
 
@@ -97,6 +57,5 @@
     <!-- BEGIN: Page JS-->
     <script src="{{asset('app-assets/js/scripts/pages/dashboard-sales.js')}}"></script>
     <!-- END: Page JS-->
-    @yield('page-js')
 </body>
 </html>

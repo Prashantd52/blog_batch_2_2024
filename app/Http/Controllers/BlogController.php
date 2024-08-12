@@ -50,7 +50,8 @@ class BlogController extends Controller
                     }
                     $img='<img src="/'.$blog->cover_image.'" height="100px" >';
 
-                    $action ='<a href="'.route('blogs.edit',$blog->id).'" title="edit" target="_blank"><i class="la la-edit"></i></a>';
+                    $action ='<a href="'.route('blogs.edit',$blog->slug).'" title="edit" target="_blank"><i class="la la-edit"></i></a>&emsp;';
+                    $action .='<a href="'.route('blogs.show',$blog->slug).'" title="show" target="_blank"><i class="la la-eye"></i></a>';
                     $data[]=[
                         $blog->title,
                         $img,
@@ -104,7 +105,7 @@ class BlogController extends Controller
     public function store(Request $request)
     {
         // dd($request);
-        $cover_image_path = 'hello';
+        $cover_image_path = '';
 
         if(isset($request->blog_id))
         {
@@ -122,6 +123,7 @@ class BlogController extends Controller
 
         // dd($cover_image_path);
         $blog->title = $request->title;
+        $blog->slug = strtolower(str_replace(' ', '-', $request->title));
         $blog->content = $request->content;
         $blog->category_id = $request->category_id;
         $blog->cover_image = $cover_image_path;
@@ -140,9 +142,13 @@ class BlogController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
         //
+        $blog = Blog::with('category','tags')->where('slug','=',$slug)->first();
+
+        return view('backend.blogs.show', compact('blog'));
+
     }
 
     /**
@@ -155,10 +161,13 @@ class BlogController extends Controller
     {
         //
         // $blog = Blog::find($id);
-        $blog = Blog::where('id','=',$id)->first();
+        // $blog = Blog::where('id','=',$id)->first();
+        $blog = Blog::where('slug','=',$id)->first();
         $categories = Category::all();
         $tags = Tag::all();
 
+        if(!$blog)
+            return redirect()->back()->with('error', 'Blog not found');
         return view('backend.blogs.create', compact('blog', 'categories', 'tags'));
     }
 
