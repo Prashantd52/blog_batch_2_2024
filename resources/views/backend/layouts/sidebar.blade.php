@@ -14,6 +14,14 @@
                 <li class="nav-item"><a href="{{Route('categories.list')}}" target="_blank"><i class="la la-list"></i><span class="menu-title">Categories</span></a>
                 </li>
                 <li class="nav-item"><a href="{{Route('blogs.list')}}" target="_blank"><i class="la la-list"></i><span class="menu-title">Blogs</span></a></li>
+
+                <li class=" nav-item"><a href="#"><i class="la la-briefcase"></i><span class="menu-title" data-i18n="Project">Reports</span></a>
+                    <ul class="menu-content">
+                        <li><a class="menu-item" href="{{Route('reports.user_blogs')}}"><i></i><span data-i18n="Project Summary">Users Blog Report</span></a>
+                        </li>
+                        
+                    </ul>
+                </li>
                 <!-- <li class=" nav-item"><a href="#"><i class="la la-television"></i><span class="menu-title" data-i18n="Templates">Templates</span></a>
                     <ul class="menu-content">
                         <li><a class="menu-item" href="#"><i></i><span data-i18n="Vertical">Vertical</span></a>

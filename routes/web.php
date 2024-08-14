@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\ReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,4 +39,8 @@ Route::prefix('blog')->name('blogs.')->group(function () {
     Route::get('/edit/{id}', [BlogController::class, 'edit'])->name('edit');
 
     Route::get('{slug}/show', [BlogController::class, 'show'])->name('show');
+});
+
+Route::prefix('reports')->name('reports.')->group(function(){
+    Route::get('user_blogs', [ReportController::class, 'user_blogs'])->name('user_blogs');
 });

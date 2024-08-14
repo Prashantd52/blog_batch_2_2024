@@ -26,3 +26,5 @@ Route::post('/login',[AuthController::class,'login']);
 
 Route::get('blog_list',[BlogController::class,'blog_list']);
 // Route::get('blog_list','Api\BlogController@blog_list');
+
+Route::post('upload_image',[BlogController::class,'upload_image']);

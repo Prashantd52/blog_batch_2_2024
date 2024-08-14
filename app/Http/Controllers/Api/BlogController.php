@@ -8,13 +8,13 @@ use Illuminate\Http\Request;
 use App\Models\Blog;
 use App\Models\Category;
 use App\Models\Tag;
-
+use App\Traits\CommonFunction;
 use App\Traits\ValidationTrait;
 
 class BlogController extends Controller
 {
     //
-    use ValidationTrait;
+    use ValidationTrait,CommonFunction;
     public function blog_list(Request $request)
     {
         //validate user
@@ -45,4 +45,24 @@ class BlogController extends Controller
                 'message'=>'Invalid Connection'
             ]);
     }
+
+    public function upload_image(Request $request)
+    {
+        if($this->validateUser($request))
+        {
+
+            $image = $request->image;
+
+            
+            $path=$this->uploadBase64Image($image);
+            $data=[
+                'file_path'=>$path
+            ];
+            return response()->json(['status'=>'success','message'=>'Image Uploaded Succefully','data'=>$data]);
+        }
+        else
+            return response()->json(['status'=>'error','message'=>'Invalid Connection']);
+    }
+
+
 }

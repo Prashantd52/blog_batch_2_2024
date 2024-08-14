@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\User;
+use App\Models\Blog;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,8 +16,9 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // User::factory(10)->create();
-        $this->call([
-            CategorySeeder::class,
-        ]);
+        // $this->call([
+        //     CategorySeeder::class,
+        // ]);
+        Blog::factory(25)->create();
     }
 }
